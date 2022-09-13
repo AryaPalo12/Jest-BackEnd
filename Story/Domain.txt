@@ -1,0 +1,38 @@
+Registrasion page - registrasi api
+Method : POST
+URL : blogapp.com/user/registration
+Body :
+{ fullname, email, password }
+
+------------------------------------#
+
+Login page - login API
+Method : POST
+URL : blogapp.com/auth/login
+{ email, password }
+
+------------------------------------#
+
+Create Game - Create Game API
+Method : POST
+URL : blogapp.com/createGame
+{ name } 
+
+
+------------------------------------#
+
+...
+
+------------------------------------#
+
+
+
+------------------------------------#
+
+
+
+------------------------------------#
+
+
+
+------------------------------------#

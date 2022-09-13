@@ -1,0 +1,30 @@
+* Website ini akan memiliki 2 table pada database
+
+1. Users
+
+2. Games
+
+* table users akan menyimpan 
+        {   - Id (PK)
+            - Email
+            - Username
+            - Password
+            - Total_score
+            - Bio
+            - City
+            - social_media_url
+            - createdAt, 
+            - updatedAt
+
+
+* table games akan menyimpan 
+    {  - name
+       - Description
+       - thumbnail_url
+       - Game_url
+       - play_count
+       - createdAt, 
+       - updatedAt
+    }
+
+2 table ini saling berelasi. 
