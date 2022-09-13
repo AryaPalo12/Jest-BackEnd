@@ -1,0 +1,26 @@
+* Website ini akan memiliki .. Frontend website:
+
+1. REGISTRASI (Public dan VALIDATION)
+
+Pada saat masuk menu Regristasi, user akan memasukan
+nama lengkap, email, dan password 
+kemudian klik tombol submit. 
+,
+KET : Jika email sudah terdaftarkan sebelumnya, maka pendaftaran gagal
+
+KET password : password akan diamakan dalam bentuk BCRYPT.
+
+2. LOGIN (Public dan VALIDATION)
+
+Untuk login, user perlu memasukan email dan password.
+
+KET : Setiap login maka user akan mendapatkan 
+token baru atau bisa diibaratkan tanpa pengenal untuk memasuki setiap API private
+
+3. ...
+
+Penjelasakan tentang token :
+
+Token akan menyimpan id, fullname dan existUser.email.
+Setiap kali user berhasil login, maka akan membuat token baru.
+
