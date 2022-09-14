@@ -3,14 +3,18 @@
     const e = require("express");
 
 
-    const createGame = async ({title}) => {
+    const createGame = async ({name}) => {
     return await Game.create({
-        title
+        name
     });
     };
+    const gameList = async () => {
+        return await Game.findAll()
+        };
   
     const functionGameRepo = {
     createGame,
+    gameList
 
     };
 

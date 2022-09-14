@@ -8,12 +8,23 @@ const errorMessage = {
 
 const createGame = async (req, res) => {
   try {
-    const {title} =  req.body 
+    const {name} =  req.body 
     const createGame = await gameService.createGame({
-      title
+      name
     });
 
     return res.status(200).json(createGame);
+
+  } catch (error) {
+    return res.status(500).json({ message: errorMessage.error500 });
+  }
+};
+
+const gameList = async (req, res) => {
+  try {
+    const gameList = await gameService.gameList();
+
+    return res.status(200).json(gameList);
 
   } catch (error) {
     return res.status(500).json({ message: errorMessage.error500 });
@@ -24,6 +35,7 @@ const createGame = async (req, res) => {
 
 const functionGame = {
   createGame,
+  gameList
 };
 
 module.exports = functionGame;

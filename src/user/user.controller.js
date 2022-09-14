@@ -10,7 +10,6 @@ const errorMessage = {
 error500, 
 emailExist,
 error401
-
 };
 
 const succesMessage = {
@@ -64,7 +63,8 @@ const createUser = async (req, res) => {
       password,
     });
 
-    if (createUserService) return res.status(200).json({message : succesMessage.registrationsuccessful });
+    if (createUserService) 
+    return res.status(200).json({message : succesMessage.registrationsuccessful });
    
     else 
     return res.status(400).json({message : errorMessage.emailExist});
