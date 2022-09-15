@@ -6,6 +6,7 @@ const emailExist = "This email is already being used, Please choose another emai
 const updatesuccess = "Update successful"
 const registrationsuccessful = "Congratulations! Your account has been created"
 const error401 = "Authorization failed" 
+
 const errorMessage = {
 error500, 
 emailExist,
