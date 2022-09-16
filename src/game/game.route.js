@@ -33,6 +33,9 @@ gameRouter.post("/games", tokenVerification, createGameValidation, validate, (ga
  *              name:
  *                type: string
  *                example: Rock Paper Scissors
+ *              description:
+ *                type: string
+ *                example: testing
  *    responses:
  *      '200':
  *        content:

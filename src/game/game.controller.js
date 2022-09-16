@@ -8,9 +8,16 @@ const errorMessage = {
 
 const createGame = async (req, res) => {
   try {
-    const {name} =  req.body 
+    const {name, description} =  req.body 
+    const  authUser  = req.auth;
+    const  authUserId = authUser.id;
+
+    console.log("id auth", authUserId)
     const createGame = await gameService.createGame({
-      name
+      name, 
+      description,
+      authUserId,
+      
     });
 
     return res.status(200).json(createGame);
