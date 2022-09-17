@@ -63,7 +63,7 @@ const createUser = async (req, res) => {
       email,
       password,
     });
-    console.log("suryo")
+    console.log("suryo11")
     if (createUserService) {
       console.log("suryo1")
       return res.status(200).json({message : succesMessage.registrationsuccessful });
