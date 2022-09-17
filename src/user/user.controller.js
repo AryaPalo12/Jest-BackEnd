@@ -6,15 +6,10 @@ const emailExist = "This email is already being used, Please choose another emai
 const updatesuccess = "Update successful"
 const registrationsuccessful = "Congratulations! Your account has been created"
 const error401 = "Authorization failed" 
-const errorMessage = {
-error500, 
-emailExist,
-error401
-
-};
+const errorMessage = { error500, emailExist, error401 };
 
 const succesMessage = {
-  updatesuccess,registrationsuccessful
+  updatesuccess, registrationsuccessful
 };
 
 const getAllUser = async (req,res) => {
@@ -51,24 +46,15 @@ const editUser = async (req, res) => {
   } catch (error) {
     return res.status(500).json({ message: errorMessage.error500});
    }
-  }
+}
 
-
-const createUser = async (req, res) => {
+const createUser = async (req, res) => { 
   try {
     const { fullname, email, password } = req.body;
-
-    const createUserService = await userService.createUser({
-      fullname,
-      email,
-      password,
-    });
-
-    if (createUserService) return res.status(200).json({message : succesMessage.registrationsuccessful });
-   
+    const createUserService = await userService.createUser({fullname, email, password });
+    if (createUserService) return res.status(200).json({message : succesMessage.registrationsuccessful });   
     else 
     return res.status(400).json({message : errorMessage.emailExist});
-
   } catch (error) {
     return res.status(500).json({ message : errorMessage.error500});
   }
