@@ -12,18 +12,22 @@ const createGame = async (req, res) => {
     const  authUser  = req.auth;
     const  authUserId = authUser.id;
 
+    const winner = "-"
+    const user1_choice = "-"
+
     console.log("id auth", authUserId)
     const createGame = await gameService.createGame({
       name, 
       description,
       authUserId,
-      
+      winner,
+      user1_choice,
     });
 
     return res.status(200).json(createGame);
 
   } catch (error) {
-    return res.status(500).json({ message: errorMessage.error500 });
+    return res.send(error)
   }
 };
 

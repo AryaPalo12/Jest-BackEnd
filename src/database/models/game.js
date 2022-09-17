@@ -17,7 +17,11 @@ module.exports = (sequelize, DataTypes) => {
   Game.init({
     name: DataTypes.STRING,
     description : DataTypes.STRING,
-    userId : DataTypes.INTEGER
+    winner: DataTypes.STRING,
+    user1_choice: DataTypes.CHAR,
+    user2_choice: DataTypes.CHAR,
+    userId1 : DataTypes.INTEGER,
+    userId2 : DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Game',
