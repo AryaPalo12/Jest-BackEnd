@@ -11,6 +11,8 @@ gameRouter.use(express.json());
 
 gameRouter.post("/games", tokenVerification, createGameValidation, validate, (gameController.createGame))
 
+
+
 /**
  * @swagger
  * /games:
@@ -31,6 +33,9 @@ gameRouter.post("/games", tokenVerification, createGameValidation, validate, (ga
  *              name:
  *                type: string
  *                example: Rock Paper Scissors
+ *              description:
+ *                type: string
+ *                example: testing
  *    responses:
  *      '200':
  *        content:
@@ -59,5 +64,37 @@ gameRouter.post("/games", tokenVerification, createGameValidation, validate, (ga
 
 // -------------------------------------------------------------#
 
+// API GAME LIST
+
+gameRouter.get("/games", tokenVerification, (gameController.gameList))
+
+
+
+/**
+ * @swagger
+ * /games:
+ *  get:
+ *    security:
+ *      - bearerAuth : []
+ *    tags:
+ *      - games
+ *    summary: API Game list (PRIVATE)
+ *    description: API Game List
+ *    responses:
+ *      '200':
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                name:
+ *                  type: string
+ */
+  
+
+
+
+
+// -------------------------------------------------------------#
 
 module.exports = gameRouter;

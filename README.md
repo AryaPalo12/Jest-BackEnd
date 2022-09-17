@@ -1,8 +1,10 @@
 # be-aku-cinta-binar-fsw-23
 
+# BE TITIK KOMA
 
 
 ## Getting started
+1. 
 
 To make it easy for you to get started with GitLab, here's a list of recommended next steps.
 
