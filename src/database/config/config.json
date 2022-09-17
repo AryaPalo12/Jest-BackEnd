@@ -1,0 +1,28 @@
+{
+  "production": {
+    "username": "fjgmwfgkgoldux",
+    "password": "76999dc6829bbbfb7e06ae74d90ae03eeee7d211d99fde9b565df114e6a3381b",
+    "database": "d3qcl26i0puh5q",
+    "host": "ec2-52-207-90-231.compute-1.amazonaws.com",
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
+  },
+  "development": {
+    "username": "fjgmwfgkgoldux",
+    "password": "76999dc6829bbbfb7e06ae74d90ae03eeee7d211d99fde9b565df114e6a3381b",
+    "database": "d3qcl26i0puh5q",
+    "host": "ec2-52-207-90-231.compute-1.amazonaws.com",
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
+  }
+}

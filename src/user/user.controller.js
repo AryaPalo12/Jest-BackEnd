@@ -63,12 +63,14 @@ const createUser = async (req, res) => {
       email,
       password,
     });
-
-    if (createUserService) 
-    return res.status(200).json({message : succesMessage.registrationsuccessful });
-   
-    else 
-    return res.status(400).json({message : errorMessage.emailExist});
+    console.log("suryo")
+    if (createUserService) {
+      console.log("suryo1")
+      return res.status(200).json({message : succesMessage.registrationsuccessful });
+    }else {
+      console.log("suryo2")
+      return res.status(400).json({message : errorMessage.emailExist});
+    }
 
   } catch (error) {
     return res.status(500).json({ message : errorMessage.error500});

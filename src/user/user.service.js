@@ -13,7 +13,7 @@ const createUser = async ({ fullname, email, password }) => {
   const hashPassword = await bcrypt.hash(password, saltRound);
 
   const checkEmailUser = await userRepo.checkEmailAllUser(email);
-
+console.log(checkEmailUser)
   if(!checkEmailUser){
   const getUserRepo = await userRepo.createUser({ fullname, email, password: hashPassword });
   return getUserRepo;
