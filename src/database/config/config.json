@@ -5,6 +5,7 @@
     "database": "d3qcl26i0puh5q",
     "host": "ec2-52-207-90-231.compute-1.amazonaws.com",
     "dialect": "postgres",
+    "port" : "5432",
     "dialectOptions": {
       "ssl": {
         "require": true,
@@ -18,6 +19,7 @@
     "database": "d3qcl26i0puh5q",
     "host": "ec2-52-207-90-231.compute-1.amazonaws.com",
     "dialect": "postgres",
+    "port" : "5432",
     "dialectOptions": {
       "ssl": {
         "require": true,
