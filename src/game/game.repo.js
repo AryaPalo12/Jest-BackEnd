@@ -3,14 +3,26 @@
     const e = require("express");
 
 
-    const createGame = async ({title}) => {
+    const createGame = async ({name,description,authUserId,winner,user1_choice}) => {
     return await Game.create({
-        title
+        name : name,
+        description : description,
+        userId1: authUserId,
+        winner : winner,
+        user1_choice : user1_choice,
+        user2_choice: null,
+        userId2 : null
     });
     };
+    const gameList = async () => {
+        return await Game.findAll({
+            attributes: ['name', 'description']
+        })
+        };
   
     const functionGameRepo = {
     createGame,
+    gameList
 
     };
 

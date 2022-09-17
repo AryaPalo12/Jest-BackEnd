@@ -12,6 +12,22 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
+      description:{
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
+      winner:{
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
+      user1_choice:{
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
+      user2_choice:{
+        allowNull: true,
+        type: Sequelize.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -20,7 +36,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
-      userId: {
+      userId1: {
         type: Sequelize.INTEGER,
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
@@ -28,6 +44,10 @@ module.exports = {
           model: 'Users',
           key: 'id',
         }
+      },
+      userId2: {
+        allowNull: true,
+        type: Sequelize.INTEGER
       },
     });
   },
