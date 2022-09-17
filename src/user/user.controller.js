@@ -13,8 +13,14 @@ const succesMessage = {
 };
 
 const getAllUser = async (req,res) => {
-  const dataUser = await userService.getAllUser();
-  return res.json(dataUser);
+  try {
+    const dataUser = await userService.getAllUser();
+    return res.json(dataUser);
+  } catch (error) {
+    return res.json(errorMessage);
+  }
+  
+  
 }
 
 const editUser = async (req, res) => {
