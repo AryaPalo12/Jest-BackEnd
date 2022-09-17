@@ -7,7 +7,8 @@ const config = {
     password: process.env.DB_PASS,
     database: process.env.DB_NAME,
     host : process.env.DB_HOST,
-    port : process.env.DB_PORT,    
+    port : process.env.DB_PORT,
+    url : process.env.DB_URL,    
     dialect: "postgres",
     dialectOptions: {
       ssl: {
