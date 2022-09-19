@@ -14,6 +14,7 @@
         userId2 : null
     });
     };
+    //tes
     const gameList = async () => {
         return await Game.findAll({
             attributes: ['name', 'description']
