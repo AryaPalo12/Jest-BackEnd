@@ -9,13 +9,13 @@ gameRouter.use(express.json());
 
 // API CREATE GAME
 
-gameRouter.post("/createGame", tokenVerification, createGameValidation, validate, (gameController.createGnpame))
+gameRouter.post("/game/createGame", tokenVerification, createGameValidation, validate, (gameController.createGame))
 
 
 
 /**
  * @swagger
- * /createGame:
+ * /game/createGame:
  *  post:
  *    security:
  *      - bearerAuth : []
@@ -66,13 +66,13 @@ gameRouter.post("/createGame", tokenVerification, createGameValidation, validate
 
 // API GAME LIST
 
-gameRouter.get("/gameList", tokenVerification, (gameController.gameList))
+gameRouter.get("/game/list", tokenVerification, (gameController.gameList))
 
 
 
 /**
  * @swagger
- * /gameList:
+ * /game/list:
  *  get:
  *    security:
  *      - bearerAuth : []
