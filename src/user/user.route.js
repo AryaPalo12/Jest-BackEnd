@@ -90,7 +90,7 @@ userRouter.get("/users", userController.getAllUser)
 
 //---------------------------------------------------------------------#
 
-userRouter.post("/user/registration",checkSchema(registrationValidationObject),
+userRouter.post("/user/registration", checkSchema(registrationValidationObject),
 validate, userController.createUser);
 
 // API EDIT USER 

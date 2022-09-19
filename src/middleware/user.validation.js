@@ -7,8 +7,7 @@ const registrationValidationObject = {
   fullname: {
     in: ["body"],
     isString: true,
-    notEmpty: true,
-    
+    notEmpty: true,    
   },
   email: {
     in: ["body"],
@@ -20,7 +19,17 @@ const registrationValidationObject = {
     isStrongPassword: true,
     notEmpty: true,
   }, 
+};
 
+const loginValidationObject = {
+  email: {
+    in: ["body"],
+    isEmail: true,
+  },
+  password: {
+    in: ["body"],
+    isStrongPassword: true,
+  },
 };
 
 const updateUserValidation = [
@@ -38,5 +47,6 @@ const updateUserValidation = [
 
 module.exports = {
   registrationValidationObject,
+  loginValidationObject,
   updateUserValidation
 };
