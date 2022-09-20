@@ -1,16 +1,10 @@
-<<<<<<< HEAD
-=======
 # be-aku-cinta-binar-fsw-23
 
->>>>>>> 1e1c21edc820eff628b700cb8f09f4201b34120a
 # BE TITIK KOMA
 
 
 ## Getting started
-<<<<<<< HEAD
-=======
 1. 
->>>>>>> 1e1c21edc820eff628b700cb8f09f4201b34120a
 
 To make it easy for you to get started with GitLab, here's a list of recommended next steps.
 
