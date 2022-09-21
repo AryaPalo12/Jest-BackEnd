@@ -4,6 +4,7 @@ const tokenVerification = require('../middleware/token.verification');
 const gameController = require("./game.controller");
 const { createGameValidation } = require("../middleware/game.validation")
 const { validate } = require("../middleware/validation");
+const { generateHTML } = require('swagger-ui-express');
 
 gameRouter.use(express.json());
 
@@ -96,5 +97,13 @@ gameRouter.get("/game/list", tokenVerification, (gameController.gameList))
 
 
 // -------------------------------------------------------------#
+
+//UPDATE PILIHAN Player Dan CheckWinner
+gameRouter.put("/game/play",gameController.updatePlayerChoice)
+
+//GET ROOM 
+gameRouter.get("/game/:roomId",gameController.getRoom);
+
+
 
 module.exports = gameRouter;

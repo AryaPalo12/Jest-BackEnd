@@ -135,6 +135,7 @@ validate, userController.editUser)
 
 //---------------------------------------------------------------------#
 
-
+//GET SPICIFIC USER
+userRouter.get("/user/:userId",userController.getUserById)
 
 module.exports = userRouter;
