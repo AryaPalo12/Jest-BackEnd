@@ -55,7 +55,7 @@ const getRoom = async (req,res) => {
 const updatePlayerChoice = async (req,res) => {
   try {
     const {player, userId, userChoice, roomId} = req.body;
-    const result = await gameService.updatePlayerChoice({player, userId, userChoice, roomId});
+    let result = await gameService.updatePlayerChoice({player, userId, userChoice, roomId});
     if(player == "player1"){
       return res.status(200).json({message : "Pilihan Berhasil di Update Silahkan Tunggu Player 2 !"})
     }else{

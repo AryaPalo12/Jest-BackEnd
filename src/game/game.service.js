@@ -34,7 +34,7 @@ const updatePlayerChoice = async ({ player, userId, userChoice, roomId }) => {
 };
 
 const checkWinner = async ({roomId}) => {
-  const result = "";
+  let result = "";
   const room = await gameRepo.getRoom({roomId});
   if(room.user1_choice == room.user2_choice){
     result = "DRAW";
