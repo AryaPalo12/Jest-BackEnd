@@ -2,23 +2,20 @@ const { Game } = require("../database/models");
 const { Op, where } = require("sequelize");
 const e = require("express");
 
-const createGame = async ({
-  name,
-  description,
-  authUserId,
-  winner,
-  user1_choice,
-}) => {
-  return await Game.create({
-    name: name,
-    description: description,
+const createGame = async ({ name, description, authUserId }) => {
+  const created = await Game.create({
+    // name : name,
+    // description : description,
+    name,
+    description,
     userId1: authUserId,
-    winner: winner,
-    user1_choice: user1_choice,
+    winner: null,
+    user1_choice: null,
     user2_choice: null,
     userId2: null,
   });
 };
+
 //tes
 const gameList = async () => {
   return await Game.findAll({
@@ -45,7 +42,7 @@ const updatePlayerChoice = async ({ player, userId, userChoice, roomId }) => {
         returning: true,
       }
     );
-  }else{
+  } else {
     return await Game.update(
       { userId2: userId, user2_choice: userChoice },
       {
@@ -58,23 +55,24 @@ const updatePlayerChoice = async ({ player, userId, userChoice, roomId }) => {
   }
 };
 
-const updateWinner = async ({result,roomId}) => {
+const updateWinner = async ({ result, roomId }) => {
   return await Game.update(
-    {winner: result},{
-      where:{
+    { winner: result },
+    {
+      where: {
         id: roomId,
       },
-      returning: true
+      returning: true,
     }
-  )
-}
+  );
+};
 
 const functionGameRepo = {
   createGame,
   gameList,
   getRoom,
   updatePlayerChoice,
-  updateWinner
+  updateWinner,
 };
 
 module.exports = functionGameRepo;

@@ -17,11 +17,11 @@ module.exports = {
         type: Sequelize.STRING,
       },
       winner:{
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.STRING,
       },
       user1_choice:{
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.STRING,
       },
       user2_choice:{

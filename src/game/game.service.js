@@ -1,18 +1,10 @@
 const gameRepo = require("./game.repo");
 
-const createGame = async ({
-  name,
-  description,
-  authUserId,
-  winner,
-  user1_choice,
-}) => {
-  return await gameRepo.createGame({
+const createGame = async ({ name, description, authUserId }) => {
+  return await postRepo.createGame({
     name,
     description,
     authUserId,
-    winner,
-    user1_choice,
   });
 };
 
