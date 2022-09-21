@@ -1,12 +1,10 @@
 const postRepo = require("./game.repo");
 
-const createGame = async ({name,description,authUserId,winner, user1_choice}) => {
+const createGame = async ({ name, description, authUserId }) => {
   return await postRepo.createGame({
     name,
     description,
     authUserId,
-    winner,
-    user1_choice,
   });
 };
 
@@ -14,10 +12,9 @@ const gameList = async () => {
   return await postRepo.gameList();
 };
 
-
 const FunctionGameService = {
   createGame,
-  gameList
+  gameList,
 };
 
 module.exports = FunctionGameService;
