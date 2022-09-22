@@ -101,10 +101,10 @@ gameRouter.get("/game/list", tokenVerification, (gameController.gameList))
 //UPDATE PILIHAN Player Dan CheckWinner
 //changed
 //gameRouter.put("/game/play",gameController.updatePlayerChoice)
-gameRouter.put("/game/play/:roomId",gameController.updatePlayerChoice)
+gameRouter.put("/game/play/:roomId",tokenVerification,gameController.updatePlayerChoice)
 
 //GET ROOM 
-gameRouter.get("/game/:roomId",gameController.getRoom);
+gameRouter.get("/game/:roomId",tokenVerification,gameController.getRoom);
 
 
 

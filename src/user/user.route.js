@@ -136,6 +136,6 @@ validate, userController.editUser)
 //---------------------------------------------------------------------#
 
 //GET SPICIFIC USER
-userRouter.get("/user/:userId",userController.getUserById)
+userRouter.get("/user/:userId",tokenVerification,userController.getUserById)
 
 module.exports = userRouter;

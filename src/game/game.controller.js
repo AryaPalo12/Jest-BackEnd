@@ -44,6 +44,7 @@ const getRoom = async (req,res) => {
 const updatePlayerChoice = async (req,res) => {
   try {
     const {player, userId, userChoice} = req.body;
+    console.log (player);
     const {roomId} = req.params;
     let result = await gameService.updatePlayerChoice({player, userId, userChoice, roomId});
     if(player == "player1"){
