@@ -99,7 +99,9 @@ gameRouter.get("/game/list", tokenVerification, (gameController.gameList))
 // -------------------------------------------------------------#
 
 //UPDATE PILIHAN Player Dan CheckWinner
-gameRouter.put("/game/play",gameController.updatePlayerChoice)
+//changed
+//gameRouter.put("/game/play",gameController.updatePlayerChoice)
+gameRouter.put("/game/play/:roomId",gameController.updatePlayerChoice)
 
 //GET ROOM 
 gameRouter.get("/game/:roomId",gameController.getRoom);

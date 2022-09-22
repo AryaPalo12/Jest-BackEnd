@@ -11,11 +11,9 @@ const createGame = async (req, res) => {
     const { name, description } = req.body;
     //remove uneeded code , remove variable initiation with = '-' value == better to use null in repo creation
     //const  authUser  = req.auth;
-    const authUserId = req.auth.id;
     const createGame = await gameService.createGame({
       name,
       description,
-      authUserId,
     });
     return res.status(200).json(createGame);
   } catch (error) {
@@ -45,14 +43,14 @@ const getRoom = async (req,res) => {
 
 const updatePlayerChoice = async (req,res) => {
   try {
-    const {player, userId, userChoice, roomId} = req.body;
+    const {player, userId, userChoice} = req.body;
+    const {roomId} = req.params;
     let result = await gameService.updatePlayerChoice({player, userId, userChoice, roomId});
     if(player == "player1"){
       return res.status(200).json({message : "Pilihan Berhasil di Update Silahkan Tunggu Player 2 !"})
     }else{
       result = await gameService.checkWinner({roomId});
       return res.status(200).json({result})
-
     }
   } catch (error) {
     return res.status(500).json({ message: errorMessage.error500 });

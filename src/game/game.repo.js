@@ -2,16 +2,16 @@ const { Game } = require("../database/models");
 const { Op, where } = require("sequelize");
 const e = require("express");
 
-const createGame = async ({ name, description, authUserId }) => {
-  const created = await Game.create({
+const createGame = async ({ name, description }) => {
+  return await Game.create({
     // name : name,
     // description : description,
     name,
     description,
-    userId1: authUserId,
     winner: null,
     user1_choice: null,
     user2_choice: null,
+    userId1: null,
     userId2: null,
   });
 };
