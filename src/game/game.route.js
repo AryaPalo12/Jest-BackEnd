@@ -67,7 +67,7 @@ gameRouter.post("/game/createGame", tokenVerification, createGameValidation, val
 
 // API GAME LIST
 
-gameRouter.get("/game/list", tokenVerification, (gameController.gameList))
+gameRouter.get("/game/list", (gameController.gameList))
 
 
 
@@ -75,8 +75,6 @@ gameRouter.get("/game/list", tokenVerification, (gameController.gameList))
  * @swagger
  * /game/list:
  *  get:
- *    security:
- *      - bearerAuth : []
  *    tags:
  *      - games
  *    summary: API Game list (PRIVATE)
