@@ -52,13 +52,26 @@ const { User } = require("../database/models");
     })
   }
 
+  const updateScore = async ({score,userId}) => {
+    return await User.update(
+      {score : score},
+      {
+        where: {
+          id: userId,
+        },
+        returning: true,
+      }
+    )
+    }
+
   const userRepo = {
     createUser,
     getAllUser,
     editUser,
     checkEmailAllUser,
     checkSameEmail,
-    getUserById
+    getUserById,
+    updateScore
   };
 
   module.exports = userRepo;

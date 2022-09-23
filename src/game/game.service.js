@@ -1,3 +1,4 @@
+const userRepo = require("../user/user.repo");
 const gameRepo = require("./game.repo");
 
 const createGame = async ({ name, description }) => {
@@ -24,29 +25,44 @@ const updatePlayerChoice = async ({ player, userId, userChoice, roomId }) => {
   });
 };
 
-const checkWinner = async ({roomId}) => {
+const checkWinner = async ({ roomId }) => {
   let result = "";
-  const room = await gameRepo.getRoom({roomId});
-  if(room.user1_choice == room.user2_choice){
+  const room = await gameRepo.getRoom({ roomId });
+  if (room.user1_choice == room.user2_choice) {
     result = "DRAW";
-  }else{
-    if(room.user1_choice == "P" && room.user2_choice == "R") result = room.userId1;
-    if(room.user1_choice == "R" && room.user2_choice == "S") result = room.userId1;
-    if(room.user1_choice == "S" && room.user2_choice == "P") result = room.userId1;
-    if(room.user1_choice == "P" && room.user2_choice == "S") result = room.userId2;
-    if(room.user1_choice == "R" && room.user2_choice == "P") result = room.userId2;
-    if(room.user1_choice == "S" && room.user2_choice == "R") result = room.userId2;
+  } else {
+    if (room.user1_choice == "P" && room.user2_choice == "R")
+      result = room.userId1;
+    if (room.user1_choice == "R" && room.user2_choice == "S")
+      result = room.userId1;
+    if (room.user1_choice == "S" && room.user2_choice == "P")
+      result = room.userId1;
+    if (room.user1_choice == "P" && room.user2_choice == "S")
+      result = room.userId2;
+    if (room.user1_choice == "R" && room.user2_choice == "P")
+      result = room.userId2;
+    if (room.user1_choice == "S" && room.user2_choice == "R")
+      result = room.userId2;
   }
-  await gameRepo.updateWinner({result,roomId})
+
+  if (result != "DRAW") {
+    let userId = parseInt(result);
+    const userWinner = await userRepo.getUserById({ userId });
+
+    result = userWinner.fullname;
+    let score = userWinner.score + 1;
+    await userRepo.updateScore({ score, userId });
+  }
+  await gameRepo.updateWinner({ result, roomId });
   return result;
-}
+};
 
 const FunctionGameService = {
   createGame,
   gameList,
   getRoom,
   updatePlayerChoice,
-  checkWinner
+  checkWinner,
 };
 
 module.exports = FunctionGameService;
