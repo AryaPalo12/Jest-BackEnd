@@ -22,9 +22,8 @@ const createGame = async (req, res) => {
 };
 
 const gameList = async (req, res) => {
-  try {W
-    const pageNumber = req.query
-    const gameList = await gameService.gameList({pageNumber});
+  try {
+  const gameList = await gameService.gameList();
 
 
 

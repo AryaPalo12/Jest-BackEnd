@@ -20,15 +20,15 @@ const createGame = async ({ name, description }) => {
 };
 
 //tes
-const gameList = async ({pageNumber}) => {
+const gameList = async () => {
   return await Game.findAll({
     order: [
       // Will escape title and validate DESC against a list of valid direction parameters
       ["winner", "DESC"],
     ],
-    offset: (pageNumber - 1) * pageFormula,
+    offset: (1 - 1) * pageFormula,
     limit: limitValue,
-    attributes: ["id", "name", "description","winner"],
+    attributes: ["id", "name", "description"],
   
   });
 };

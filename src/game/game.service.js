@@ -8,8 +8,8 @@ const createGame = async ({ name, description }) => {
   });
 };
 
-const gameList = async ({pageNumber}) => {
-  return await gameRepo.gameList({pageNumber});
+const gameList = async () => {
+  return await gameRepo.gameList();
 };
 
 const getRoom = async ({ roomId }) => {
