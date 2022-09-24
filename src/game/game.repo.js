@@ -24,11 +24,11 @@ const gameList = async (pageNumber) => {
   return await Game.findAll({
     order: [
       // Will escape title and validate DESC against a list of valid direction parameters
-      ["winner", "DESC"],
+      ["id", "DESC"],
     ],
     offset: (pageNumber - 1) * pageFormula,
     limit: limitValue,
-    attributes: ["id", "name", "description"],
+    attributes: ["id", "name", "description", "winner"],
   
   });
 };
