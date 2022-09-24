@@ -4,6 +4,7 @@ const tokenVerification = require('../middleware/token.verification');
 const gameController = require("./game.controller");
 const { createGameValidation } = require("../middleware/game.validation")
 const { validate } = require("../middleware/validation");
+const { generateHTML } = require('swagger-ui-express');
 
 gameRouter.use(express.json());
 
@@ -66,7 +67,7 @@ gameRouter.post("/game/createGame", tokenVerification, createGameValidation, val
 
 // API GAME LIST
 
-gameRouter.get("/game/list", tokenVerification, (gameController.gameList))
+gameRouter.get("/game/list", (gameController.gameList))
 
 
 
@@ -74,8 +75,6 @@ gameRouter.get("/game/list", tokenVerification, (gameController.gameList))
  * @swagger
  * /game/list:
  *  get:
- *    security:
- *      - bearerAuth : []
  *    tags:
  *      - games
  *    summary: API Game list (PRIVATE)
@@ -96,5 +95,15 @@ gameRouter.get("/game/list", tokenVerification, (gameController.gameList))
 
 
 // -------------------------------------------------------------#
+
+//UPDATE PILIHAN Player Dan CheckWinner
+//changed
+//gameRouter.put("/game/play",gameController.updatePlayerChoice)
+gameRouter.put("/game/play/:roomId",tokenVerification,gameController.updatePlayerChoice)
+
+//GET ROOM 
+gameRouter.get("/game/:roomId",tokenVerification,gameController.getRoom);
+
+
 
 module.exports = gameRouter;

@@ -66,10 +66,21 @@ const createUser = async (req, res) => {
   }
 };
 
+const getUserById = async (req,res) => {
+  try {
+    const {userId} = req.params;
+    const user = await userService.getUserById({userId});
+    res.status(200).json(user);
+  } catch (error) {
+    
+  }
+}
+
 const userController = {
   createUser,
   getAllUser,
-  editUser
+  editUser,
+  getUserById
 };
 
 module.exports = userController;
