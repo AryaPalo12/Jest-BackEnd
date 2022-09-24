@@ -26,7 +26,7 @@ const gameList = async (pageNumber) => {
       // Will escape title and validate DESC against a list of valid direction parameters
       ["winner", "DESC"],
     ],
-    offset: (1 - 1) * pageFormula,
+    offset: (pageNumber - 1) * pageFormula,
     limit: limitValue,
     attributes: ["id", "name", "description"],
   
