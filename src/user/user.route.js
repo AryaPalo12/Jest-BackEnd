@@ -185,6 +185,44 @@ validate, userController.editUser)
  *                updatedAt:
  *                  type: string
  */
-userRouter.get("/user/:userId",tokenVerification,userController.getUserById)
+userRouter.get("/user/:userId",tokenVerification,userController.getUserById);
+
+//Add 1 score point
+/**
+ * @swagger
+ * /user/addScore/{userId}:
+ *  get:
+ *    security:
+ *      - bearerAuth : []
+ *    tags:
+ *      - users
+ *    summary: API add Score / Points (PRIVATE & VALIDATION)
+ *    parameters:
+ *      - in: path
+ *        name: userId
+ *        value : 1
+ *    responses:
+ *      '200':
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                id:
+ *                  type: integer
+ *                fullname:
+ *                  type: string
+ *                email:
+ *                  type: string
+ *                password:
+ *                  type: string
+ *                score:
+ *                  type: integer
+ *                createdAt:
+ *                  type: string
+ *                updatedAt:
+ *                  type: string
+ */
+userRouter.post("/user/addScore/:userId",tokenVerification,userController.userAddScore);
 
 module.exports = userRouter;
