@@ -11,7 +11,7 @@ let limitValue = 8;
         ],
         offset: (pageNumber - 1) * pageFormula,
         limit: limitValue,
-        attributes: ["id", "name", "description", "winner"]
+        attributes: ["id", "fullname", "score"]
       });
     }else{
       return await User.findAll();
