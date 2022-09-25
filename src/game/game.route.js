@@ -99,9 +99,92 @@ gameRouter.get("/game/list", (gameController.gameList))
 //UPDATE PILIHAN Player Dan CheckWinner
 //changed
 //gameRouter.put("/game/play",gameController.updatePlayerChoice)
+/**
+ * @swagger
+ * /game/play/{roomId}:
+ *  put:
+ *    security:
+ *      - bearerAuth : []
+ *    tags:
+ *      - games
+ *    summary: API to update Player Choice and Check Room winner
+ *    description: API to update Player Choice and Check Room winner
+ *    parameters:
+ *      - in: path
+ *        name: roomId
+ *        required: true
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            properties:
+ *              player:
+ *                type: string
+ *                example: Player1
+ *              userId:
+ *                type: int
+ *                example: 1
+ *              userChoice:
+ *                type: string
+ *                example: P
+ *    responses:
+ *      '200':
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                result:
+ *                  type: string
+ */  
 gameRouter.put("/game/play/:roomId",tokenVerification,gameController.updatePlayerChoice)
 
-//GET ROOM 
+//GET ROOM
+/**
+ * @swagger
+ * /game/{roomId}:
+ *  get:
+ *    security:
+ *      - bearerAuth : []
+ *    tags:
+ *      - games
+ *    summary: API to get detail room with room id
+ *    description: API to get detail room with room id
+ *    parameters:
+ *      - in: path
+ *        name: roomId
+ *        required: true
+ *    requestBody:
+ *    responses:
+ *      '200':
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                id:
+ *                  type: integer
+ *                name:
+ *                  type: string
+ *                description:
+ *                  type: string
+ *                winner:
+ *                  type: string
+ *                user1_choice:
+ *                  type: string
+ *                user2_choice:
+ *                  type: string
+ *                userId1:
+ *                  type: integer
+ *                userId2:
+ *                  type: integer
+ *                updatedAt:
+ *                  type: string
+ *                createdAt:
+ *                  type: string
+ */  
 gameRouter.get("/game/:roomId",tokenVerification,gameController.getRoom);
 
 
