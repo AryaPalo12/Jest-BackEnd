@@ -1,7 +1,22 @@
 const { User } = require("../database/models");
 
-  const getAllUser = async () => {
-    return await User.findAll();
+let pageFormula = 8 + 1 - 1; 
+let limitValue = 8;
+
+  const getAllUser = async (pageNumber) => {
+    if(pageNumber != undefined){
+      return await User.findAll({
+        order: [
+          ["score", "DESC"] 
+        ],
+        offset: (pageNumber - 1) * pageFormula,
+        limit: limitValue,
+        attributes: ["id", "name", "description", "winner"]
+      });
+    }else{
+      return await User.findAll();
+    }
+    
   };
 
   const createUser = async ({ fullname, email, password }) => {

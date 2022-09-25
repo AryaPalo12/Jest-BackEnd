@@ -14,7 +14,8 @@ const succesMessage = {
 
 const getAllUser = async (req,res) => {
   try {
-    const dataUser = await userService.getAllUser();
+    const {pageNumber} = req.query
+    const dataUser = await userService.getAllUser(pageNumber);
     return res.json(dataUser);
   } catch (error) {
     return res.json(errorMessage);
