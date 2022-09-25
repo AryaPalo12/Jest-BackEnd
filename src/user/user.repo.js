@@ -3,7 +3,8 @@ const { User } = require("../database/models");
 let pageFormula = 8 + 1 - 1; 
 let limitValue = 8;
 
-  const getAllUser = async (pageNumber) => {
+  const getAllUser = async ({pageNumber,limitParm}) => {
+    if(limitParm != undefined) limitValue = limitParm;
     if(pageNumber != undefined){
       return await User.findAll({
         order: [
