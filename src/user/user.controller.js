@@ -73,7 +73,7 @@ const getUserById = async (req,res) => {
     const user = await userService.getUserById({userId});
     res.status(200).json(user);
   } catch (error) {
-    
+    return res.status(500).json({ message : errorMessage.error500});
   }
 }
 
