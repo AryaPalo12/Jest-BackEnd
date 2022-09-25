@@ -2,8 +2,8 @@ const { Game } = require("../database/models");
 const { Op, where } = require("sequelize");
 const e = require("express");
 
-let pageFormula = 5 + 1 - 1; 
-let limitValue = 5;
+let pageFormula = 8 + 1 - 1; 
+let limitValue = 8;
 
 const createGame = async ({ name, description }) => {
   return await Game.create({
@@ -20,15 +20,15 @@ const createGame = async ({ name, description }) => {
 };
 
 //tes
-const gameList = async () => {
+const gameList = async (pageNumber) => {
   return await Game.findAll({
     order: [
       // Will escape title and validate DESC against a list of valid direction parameters
-      ["winner", "DESC"],
+      ["id", "DESC"] 
     ],
-    offset: (1 - 1) * pageFormula,
+    offset: (pageNumber - 1) * pageFormula,
     limit: limitValue,
-    attributes: ["id", "name", "description","winner"],
+    attributes: ["id", "name", "description", "winner"],
   
   });
 };
