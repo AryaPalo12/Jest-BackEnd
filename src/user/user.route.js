@@ -136,6 +136,9 @@ validate, userController.editUser)
 //---------------------------------------------------------------------#
 
 //GET SPICIFIC USER
-userRouter.get("/user/:userId",tokenVerification,userController.getUserById)
+userRouter.get("/user/:userId",tokenVerification,userController.getUserById);
+
+//Add 1 score point
+userRouter.post("/user/addScore/:userId",tokenVerification,userController.userAddScore);
 
 module.exports = userRouter;

@@ -49,7 +49,14 @@ const getUserById = async ({ userId }) => {
   return await userRepo.getUserById({ userId });
 };
 
+const userAddScore = async (userId) => {
+  const userWinner = await userRepo.getUserById({ userId });
+    const score = userWinner.score + 1;
+    await userRepo.updateScore({ score, userId });
+}
+
 const userService = {
+  userAddScore,
   createUser,
   getAllUser,
   editUser,

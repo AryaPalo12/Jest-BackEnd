@@ -26,7 +26,7 @@ const authUser = async (req, res) => {
         { expiresIn: "7d" }
       );
   
-      return res.status(200).json({ accessToken: token, id: existUser.id, loginStatus : 1,email: existUser.email});
+      return res.status(200).json({ accessToken: token, id: existUser.id, loginStatus : 1,email: existUser.email, fullname: existUser.fullname });
     } else {
       return res.status(400).json({message:"Login failed"});
     }

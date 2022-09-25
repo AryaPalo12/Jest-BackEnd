@@ -1,37 +1,26 @@
 {
   "development": {
-    "username": "fjgmwfgkgoldux",
-    "password": "76999dc6829bbbfb7e06ae74d90ae03eeee7d211d99fde9b565df114e6a3381b",
-    "database": "d3qcl26i0puh5q",
-    "host": "ec2-52-207-90-231.compute-1.amazonaws.com",
+    "username": "game_admin",
+    "password": "game_admin",
+    "database": "gamedb",
+    "host": "localhost",
     "dialect": "postgres",
-    "port" : "5432",
-    "dialectOptions": {
-      "ssl": {
-        "require": true,
-        "rejectUnauthorized": false
-      }
-    }
+    "port" : "5432"
   },
   "production": {
-    "username": "fjgmwfgkgoldux",
-    "password": "76999dc6829bbbfb7e06ae74d90ae03eeee7d211d99fde9b565df114e6a3381b",
-    "database": "d3qcl26i0puh5q",
-    "host": "ec2-52-207-90-231.compute-1.amazonaws.com",
+    "username": "game_admin",
+    "password": "game_admin",
+    "database": "gamedb",
+    "host": "localhost",
     "dialect": "postgres",
-    "port" : "5432",
-    "dialectOptions": {
-      "ssl": {
-        "require": true,
-        "rejectUnauthorized": false
-      }
-    }
+    "port" : "5432"
   },
   "dev": {
-    "username": "postgres",
-    "password": "mysecretpassword",
-    "database": "binar_academy",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+    "username": "game_admin",
+    "password": "game_admin",
+    "database": "gamedb",
+    "host": "localhost",
+    "dialect": "postgres",
+    "port" : "5432"
   }
 }

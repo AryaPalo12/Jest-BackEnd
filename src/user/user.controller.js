@@ -76,7 +76,19 @@ const getUserById = async (req,res) => {
   }
 }
 
+const userAddScore = async (req,res) => {
+  try{
+    const {userId} = req.params;
+    await userService.userAddScore (userId)
+    res.status(200).json({userId, message: 'Score Added Success'});
+  }
+  catch(error){
+    res.status(500).json({message: 'Something gone wrong when adding the score'})
+  }
+}
+
 const userController = {
+  userAddScore,
   createUser,
   getAllUser,
   editUser,
