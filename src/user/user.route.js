@@ -15,6 +15,19 @@ const userController = require("./user.controller");
  *    tags:
  *      - users
  *    summary: API Get All User (PUBLIC)
+ *    parameters:
+ *      - in: query
+ *        name: limitParm
+ *        required: false
+ *        schema:
+ *          type: integer
+ *        description : how many data that show in one page, fill pageNumber if you want use this filter
+ *      - in: query
+ *        name: pageNumber
+ *        required: false
+ *        schema:
+ *          type: integer
+ *        description : which page we wanna see
  *    responses:
  *      '200':
  *        content:
@@ -136,6 +149,42 @@ validate, userController.editUser)
 //---------------------------------------------------------------------#
 
 //GET SPICIFIC USER
+
+/**
+ * @swagger
+ * /user/{userId}:
+ *  get:
+ *    security:
+ *      - bearerAuth : []
+ *    tags:
+ *      - users
+ *    summary: API get Specific User (PRIVATE & VALIDATION)
+ *    parameters:
+ *      - in: path
+ *        name: userId
+ *        value : 1
+ *    responses:
+ *      '200':
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                id:
+ *                  type: integer
+ *                fullname:
+ *                  type: string
+ *                email:
+ *                  type: string
+ *                password:
+ *                  type: string
+ *                score:
+ *                  type: integer
+ *                createdAt:
+ *                  type: string
+ *                updatedAt:
+ *                  type: string
+ */
 userRouter.get("/user/:userId",tokenVerification,userController.getUserById);
 
 //Add 1 score point

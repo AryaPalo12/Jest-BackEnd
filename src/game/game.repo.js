@@ -21,16 +21,26 @@ const createGame = async ({ name, description }) => {
 
 //tes
 const gameList = async (pageNumber) => {
-  return await Game.findAll({
-    order: [
-      // Will escape title and validate DESC against a list of valid direction parameters
-      ["id", "DESC"] 
-    ],
-    offset: (pageNumber - 1) * pageFormula,
-    limit: limitValue,
-    attributes: ["id", "name", "description", "winner"],
-  
-  });
+
+  if(pageNumber != undefined){
+    return await Game.findAll({
+      order: [
+        ["id", "DESC"] 
+      ],
+      offset: (pageNumber - 1) * pageFormula,
+      limit: limitValue,
+      attributes: ["id", "name", "description", "winner"],
+    
+    });
+ 
+  }
+  else{
+    return await Game.findAll({
+      order: [
+        ["id", "DESC"] 
+      ],
+    });
+}
 };
 
 const getRoom = async ({ roomId }) => {
