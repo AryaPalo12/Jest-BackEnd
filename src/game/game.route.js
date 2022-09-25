@@ -77,7 +77,11 @@ gameRouter.get("/game/list", (gameController.gameList))
  *  get:
  *    tags:
  *      - games
- *    summary: API Game list (PRIVATE)
+ *    summary: API Game list (PUBLIC)
+ *    parameters:
+ *      - in: query
+ *        name: pageNumber
+ *        required: false
  *    description: API Game List
  *    responses:
  *      '200':
