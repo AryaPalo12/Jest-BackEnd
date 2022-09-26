@@ -25,8 +25,7 @@ const createUser = async ({ fullname, email, password }) => {
   } else return null;
 };
 
-const editUser = async ({ fullname, email, password, userId, authUserId }) => {
-  const hashedPassword = await bcrypt.hash(password, saltRound);
+const editUser = async ({ fullname, email, userId, authUserId }) => {
 
   //CEK EMAIL YANG INGIN DIUPDATE ADA ATAU ENGGA DALAM TABEL USERS
   const checkEmailAllUser = await userRepo.checkEmailAllUser(email);
@@ -38,7 +37,6 @@ const editUser = async ({ fullname, email, password, userId, authUserId }) => {
     const getUserRepo = await userRepo.editUser({
       fullname,
       email,
-      password: hashedPassword,
       userId,
     });
     return getUserRepo;

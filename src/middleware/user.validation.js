@@ -39,9 +39,7 @@ const updateUserValidation = [
 
   body("email").isEmail().notEmpty().
   withMessage('email cannot be empty'),
-  
-  body("password").isStrongPassword().notEmpty().
-  withMessage('Password cannot be empty'),
+
   
 ];
 

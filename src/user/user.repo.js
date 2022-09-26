@@ -31,8 +31,8 @@ const checkEmailAllUser = async (email) => {
   });
 };
 
-const editUser = async ({ fullname, email, password, userId }) => {
-  if (password == undefined || password == "") {
+const editUser = async ({ fullname, email, userId }) => {
+ 
     return await User.update(
       {
         fullname,
@@ -44,20 +44,7 @@ const editUser = async ({ fullname, email, password, userId }) => {
         },
       }
     );
-  } else {
-    return await User.update(
-      {
-        fullname,
-        email,
-        password,
-      },
-      {
-        where: {
-          id: userId,
-        },
-      }
-    );
-  }
+  
 };
 
 const checkSameEmail = async ({ email, authUserId }) => {
