@@ -40,16 +40,19 @@ const loginValidationObject = {
   },
 };
 
-const updateUserValidation = [
+const updateUserValidation = {
+  fullname: {
+    in: ["body"],
+    isString: true,
+    notEmpty: true,    
+  },
+  email: {
+    in: ["body"],
+    isEmail: true,
+    notEmpty: true,
+  },
+};
 
-  body("fullname").isString().notEmpty().
-  withMessage('Full name cannot be empty'),
-
-  body("email").isEmail().notEmpty().
-  withMessage('email cannot be empty'),
-
-  
-];
 
 module.exports = {
   registrationValidationObject,
