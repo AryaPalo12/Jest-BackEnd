@@ -47,11 +47,10 @@ const editUser = async ({ fullname, email, userId }) => {
   
 };
 
-const editPassword = async ({ userId, password }) => {
- 
+const editPassword = async ({ userId, hashPassword }) => {
   return await User.update(
     {
-      password,
+      password : hashPassword,
     },
     {
       where: {
