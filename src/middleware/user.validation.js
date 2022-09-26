@@ -21,6 +21,14 @@ const registrationValidationObject = {
   }, 
 };
 
+const updatePasswordObject = {
+  password: {
+    in: ["body"],
+    isStrongPassword: true,
+    notEmpty: true,
+  }, 
+};
+
 const loginValidationObject = {
   email: {
     in: ["body"],
@@ -46,5 +54,6 @@ const updateUserValidation = [
 module.exports = {
   registrationValidationObject,
   loginValidationObject,
-  updateUserValidation
+  updateUserValidation,
+  updatePasswordObject
 };

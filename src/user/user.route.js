@@ -1,7 +1,7 @@
 const express = require("express");
 const { checkSchema } = require("express-validator");
 const tokenVerification = require("../middleware/token.verification");
-const { registrationValidationObject, getOneUserValidation, updateUserValidation } = require("../middleware/user.validation")
+const { registrationValidationObject, getOneUserValidation, updateUserValidation,updatePasswordObject } = require("../middleware/user.validation")
 const { validate } = require("../middleware/validation");
 const userRouter = express.Router();
 
@@ -139,7 +139,7 @@ validate, userController.createUser);
  *                example: Password@123!
  *    responses:
  *      '200':
- *        description: Edit data sukses
+ *        description: Update successful
  */
 
 
@@ -147,6 +147,38 @@ userRouter.put("/user/:userId",tokenVerification, checkSchema(updateUserValidati
 validate, userController.editUser)
 
 //---------------------------------------------------------------------#
+
+//API Edit Password 
+
+/**
+ * @swagger
+ * /user/{userId}:
+ *  put:
+ *    security:
+ *      - bearerAuth : []
+ *    tags:
+ *      - users
+ *    summary: API Edit Password (PRIVATE & VALIDATION)
+ *    parameters:
+ *      - in: path
+ *        name: userId
+ *        value : 1
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            properties:
+ *              password:
+ *                type: string
+ *                example: Password@123!
+ *    responses:
+ *      '200':
+ *        description: Update successful
+ */
+userRouter.put("/user/:userId",tokenVerification, checkSchema(updatePasswordObject),
+validate, userController.editUser)
 
 //GET SPICIFIC USER
 

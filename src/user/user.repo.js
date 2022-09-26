@@ -47,6 +47,21 @@ const editUser = async ({ fullname, email, userId }) => {
   
 };
 
+const editPassword = async ({ userId, password }) => {
+ 
+  return await User.update(
+    {
+      password,
+    },
+    {
+      where: {
+        id: userId,
+      },
+    }
+  );
+
+};
+
 const checkSameEmail = async ({ email, authUserId }) => {
   return await User.findOne({
     where: {
@@ -84,6 +99,7 @@ const userRepo = {
   checkSameEmail,
   getUserById,
   updateScore,
+  editPassword,
 };
 
 module.exports = userRepo;
