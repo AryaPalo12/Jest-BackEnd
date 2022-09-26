@@ -134,9 +134,6 @@ validate, userController.createUser);
  *              email:
  *                type: string
  *                example: contoh@gmail.com
- *              password:
- *                type: string
- *                example: Password@123!
  *    responses:
  *      '200':
  *        description: Update successful
