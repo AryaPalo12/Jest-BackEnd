@@ -2,12 +2,6 @@ stages:
   # - test
   - deploy
 
-# test: 
-#   stage : test
-#   image : node:latest
-#   script: 
-#     - npm install
-#     - echo hai
 
 deploy : 
   stage : deploy

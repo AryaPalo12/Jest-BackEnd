@@ -3,8 +3,8 @@ const tokenVerification = require("../middleware/token.verification");
 const userRepo = require("./user.repo");
 const saltRound = 10;
 
-const getAllUser = async () => {
-  const getAllUserinRepo = await userRepo.getAllUser();
+const getAllUser = async ({ pageNumber, limitParm }) => {
+  const getAllUserinRepo = await userRepo.getAllUser({ pageNumber, limitParm });
   return getAllUserinRepo;
 };
 
@@ -25,9 +25,7 @@ const createUser = async ({ fullname, email, password }) => {
   } else return null;
 };
 
-const editUser = async ({ fullname, email, password, userId, authUserId }) => {
-  const hashedPassword = await bcrypt.hash(password, saltRound);
-
+const editUser = async ({ fullname, email, userId, authUserId }) => {
   //CEK EMAIL YANG INGIN DIUPDATE ADA ATAU ENGGA DALAM TABEL USERS
   const checkEmailAllUser = await userRepo.checkEmailAllUser(email);
 
@@ -38,22 +36,39 @@ const editUser = async ({ fullname, email, password, userId, authUserId }) => {
     const getUserRepo = await userRepo.editUser({
       fullname,
       email,
-      password: hashedPassword,
       userId,
     });
-    return getUserRepo;
-  } else return null;
+    return "Update successful";
+  } else return "This email is already being used, Please choose another email";
+};
+
+const editPassword = async ({ userId, password }) => {
+  const hashPassword = await bcrypt.hash(password, saltRound);
+  console.log(hashPassword)
+  const changedPassword = await userRepo.editPassword({
+    userId,
+    hashPassword,
+  });
+ return changedPassword;
 };
 
 const getUserById = async ({ userId }) => {
   return await userRepo.getUserById({ userId });
 };
 
+const userAddScore = async (userId) => {
+  const userWinner = await userRepo.getUserById({ userId });
+  const score = userWinner.score + 1;
+  await userRepo.updateScore({ score, userId });
+};
+
 const userService = {
+  userAddScore,
   createUser,
   getAllUser,
   editUser,
   getUserById,
+  editPassword,
 };
 
 module.exports = userService;

@@ -1,7 +1,7 @@
 const express = require("express");
 const { checkSchema } = require("express-validator");
 const tokenVerification = require("../middleware/token.verification");
-const { registrationValidationObject, getOneUserValidation } = require("../middleware/user.validation")
+const { registrationValidationObject, getOneUserValidation, updateUserValidation,updatePasswordObject } = require("../middleware/user.validation")
 const { validate } = require("../middleware/validation");
 const userRouter = express.Router();
 
@@ -15,6 +15,19 @@ const userController = require("./user.controller");
  *    tags:
  *      - users
  *    summary: API Get All User (PUBLIC)
+ *    parameters:
+ *      - in: query
+ *        name: limitParm
+ *        required: false
+ *        schema:
+ *          type: integer
+ *        description : how many data that show in one page, fill pageNumber if you want use this filter
+ *      - in: query
+ *        name: pageNumber
+ *        required: false
+ *        schema:
+ *          type: integer
+ *        description : which page we wanna see
  *    responses:
  *      '200':
  *        content:
@@ -121,21 +134,124 @@ validate, userController.createUser);
  *              email:
  *                type: string
  *                example: contoh@gmail.com
+ *    responses:
+ *      '200':
+ *        description: Update successful
+ */
+
+
+userRouter.put("/user/:userId",tokenVerification, checkSchema(updateUserValidation),
+validate, userController.editUser)
+
+//---------------------------------------------------------------------#
+
+//API Edit Password 
+
+/**
+ * @swagger
+ * /user/changePassword/{userId}:
+ *  put:
+ *    security:
+ *      - bearerAuth : []
+ *    tags:
+ *      - users
+ *    summary: API Edit Password (PRIVATE & VALIDATION)
+ *    parameters:
+ *      - in: path
+ *        name: userId
+ *        value : 1
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            properties:
  *              password:
  *                type: string
  *                example: Password@123!
  *    responses:
  *      '200':
- *        description: Edit data sukses
+ *        description: Update successful
  */
-
-
-userRouter.put("/user/:userId",tokenVerification, checkSchema(registrationValidationObject),
-validate, userController.editUser)
-
-//---------------------------------------------------------------------#
+userRouter.put("/user/changePassword/:userId",tokenVerification, checkSchema(updatePasswordObject),
+validate, userController.editPassword)
 
 //GET SPICIFIC USER
-userRouter.get("/user/:userId",tokenVerification,userController.getUserById)
+
+/**
+ * @swagger
+ * /user/{userId}:
+ *  get:
+ *    security:
+ *      - bearerAuth : []
+ *    tags:
+ *      - users
+ *    summary: API get Specific User (PRIVATE & VALIDATION)
+ *    parameters:
+ *      - in: path
+ *        name: userId
+ *        value : 1
+ *    responses:
+ *      '200':
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                id:
+ *                  type: integer
+ *                fullname:
+ *                  type: string
+ *                email:
+ *                  type: string
+ *                password:
+ *                  type: string
+ *                score:
+ *                  type: integer
+ *                createdAt:
+ *                  type: string
+ *                updatedAt:
+ *                  type: string
+ */
+userRouter.get("/user/:userId",tokenVerification,userController.getUserById);
+
+//Add 1 score point
+/**
+ * @swagger
+ * /user/addScore/{userId}:
+ *  get:
+ *    security:
+ *      - bearerAuth : []
+ *    tags:
+ *      - users
+ *    summary: API add Score / Points (PRIVATE & VALIDATION)
+ *    parameters:
+ *      - in: path
+ *        name: userId
+ *        value : 1
+ *    responses:
+ *      '200':
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                id:
+ *                  type: integer
+ *                fullname:
+ *                  type: string
+ *                email:
+ *                  type: string
+ *                password:
+ *                  type: string
+ *                score:
+ *                  type: integer
+ *                createdAt:
+ *                  type: string
+ *                updatedAt:
+ *                  type: string
+ */
+userRouter.post("/user/addScore/:userId",tokenVerification,userController.userAddScore);
 
 module.exports = userRouter;
