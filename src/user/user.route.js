@@ -1,7 +1,7 @@
 const express = require("express");
 const { checkSchema } = require("express-validator");
 const tokenVerification = require("../middleware/token.verification");
-const { registrationValidationObject, getOneUserValidation } = require("../middleware/user.validation")
+const { registrationValidationObject, getOneUserValidation, updateUserValidation } = require("../middleware/user.validation")
 const { validate } = require("../middleware/validation");
 const userRouter = express.Router();
 
@@ -143,7 +143,7 @@ validate, userController.createUser);
  */
 
 
-userRouter.put("/user/:userId",tokenVerification, checkSchema(registrationValidationObject),
+userRouter.put("/user/:userId",tokenVerification, checkSchema(updateUserValidation),
 validate, userController.editUser)
 
 //---------------------------------------------------------------------#
