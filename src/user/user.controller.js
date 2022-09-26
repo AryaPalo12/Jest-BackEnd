@@ -28,9 +28,13 @@ const editPassword = async (req, res) => {
   try {
     const { userId } = req.params;
     const { password } = req.body;
-    if (getEditUserService && authUserId == userId) {
+    const authUser = req.auth;
+    const authUserId = authUser.id;
+    
+    if (authUserId == userId) {
       const editPassword = userService.editPassword ({userId,password});
-      return res.status(401).json({ message: editPassword });
+      if(editPassword)return res.status(200).json({ message:updatesuccess});
+      else return res.status(401).json({ message: "update fail!" });
     }else {
       return res.status(401).json({ message: errorMessage.error401 });
     }
@@ -47,7 +51,7 @@ const editUser = async (req, res) => {
     const authUserId = authUser.id;
     const authUserEmail = authUser.email;
 
-    if (getEditUserService && authUserId == userId) {
+    if (authUserId == userId) {
       const getEditUserService = await userService.editUser({
         fullname,
         email,

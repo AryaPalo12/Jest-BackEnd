@@ -44,15 +44,12 @@ const editUser = async ({ fullname, email, userId, authUserId }) => {
 
 const editPassword = async ({ userId, password }) => {
   const hashPassword = await bcrypt.hash(password, saltRound);
-  const changedPassword = await editPassword.editPassword({
+  console.log(hashPassword)
+  const changedPassword = await userRepo.editPassword({
     userId,
     hashPassword,
   });
-  if (changedPassword) {
-    return "Update Successful";
-  } else {
-    return "Update Failed!";
-  }
+ return changedPassword;
 };
 
 const getUserById = async ({ userId }) => {
