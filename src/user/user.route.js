@@ -152,7 +152,7 @@ validate, userController.editUser)
 
 /**
  * @swagger
- * /user/{userId}:
+ * /user/changePassword/{userId}:
  *  put:
  *    security:
  *      - bearerAuth : []
@@ -177,8 +177,8 @@ validate, userController.editUser)
  *      '200':
  *        description: Update successful
  */
-userRouter.put("/user/:userId",tokenVerification, checkSchema(updatePasswordObject),
-validate, userController.editUser)
+userRouter.put("/user/changePassword/:userId",tokenVerification, checkSchema(updatePasswordObject),
+validate, userController.editPassword)
 
 //GET SPICIFIC USER
 

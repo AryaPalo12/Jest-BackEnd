@@ -110,6 +110,7 @@ const userController = {
   getAllUser,
   editUser,
   getUserById,
+  editPassword
 };
 
 module.exports = userController;
