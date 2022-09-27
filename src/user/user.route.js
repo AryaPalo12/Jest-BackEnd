@@ -1,7 +1,9 @@
 const express = require("express");
 const { checkSchema } = require("express-validator");
 const tokenVerification = require("../middleware/token.verification");
-const { registrationValidationObject, getOneUserValidation, updateUserValidation,updatePasswordObject } = require("../middleware/user.validation")
+const { registrationValidationObject, 
+        getOneUserValidation, forgotValidation,
+        updateUserValidation,updatePasswordObject } = require("../middleware/user.validation")
 const { validate } = require("../middleware/validation");
 const userRouter = express.Router();
 
@@ -105,6 +107,18 @@ userRouter.get("/users", userController.getAllUser)
 
 userRouter.post("/user/registration", checkSchema(registrationValidationObject),
 validate, userController.createUser);
+
+
+// API forgot password
+
+//1. get email = seach user by email
+//2. get email
+//3. cek email ada atau tidak di tabel, klo ada generate password otomatis  / tidak ada return false...
+//4. update password di db dengan password otomatis sesuia dengan user yang kirim email
+//5. kirim email ke user
+
+userRouter.post("/user/forgot-password", checkSchema(forgotValidation), validate, userController.findEmail);
+
 
 // API EDIT USER 
 
