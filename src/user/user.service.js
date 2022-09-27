@@ -50,9 +50,11 @@ const editUser = async ({ fullname, email, userId, authUserId }) => {
 
 const findEmail = async ({ email }) => { 
   const checkEmailUser = await userRepo.checkEmailAllUser(email);
-  const userId = checkEmailUser.id;
-  const userName = checkEmailUser.fullname;
-  if(checkEmailUser.email){
+  // const userId = checkEmailUser.id;
+  // const userName = checkEmailUser.fullname;
+  if(checkEmailUser){
+    const userId = checkEmailUser.id;
+    const userName = checkEmailUser.fullname;
     //generate password
     const password = generator.generate({
       length: 10,
@@ -81,8 +83,8 @@ const findEmail = async ({ email }) => {
       // text: 'That was easy! ' + password,
       html:`
       <p>Hi ${userName},</p>
-      <p>Your password has been changed successfully</p>     
-      <h2>Your new password is : ${password}</h2>`
+      <p>Password has been changed successfully</p>     
+      <h2>Your new password is :  ${password}</h2>`
     };
     
     transporter.sendMail(mailOptions, function(error, info){
@@ -90,10 +92,11 @@ const findEmail = async ({ email }) => {
         console.log(error);
       } else {
         console.log('Email sent: ' + info.response);
+        info.response;
       }
     });
   } else {
-    // false
+    return null;
   }
   return checkEmailUser.email;  
 };

@@ -2,16 +2,18 @@ const userService = require("./user.service");
 const { validationResult } = require("express-validator");
 
 const error500 = "Something went wrong. Please try again later";
-const emailExist =
-  "This email is already being used, Please choose another email";
+const emailExist = "This email is already being used, Please choose another email";
+const emailCheck = "Kindly check your email account!, We have sent a new password for you";
+const emailDontExist = 'We do not find your email. Please, input correctly!';
 const updatesuccess = "Update successful";
 const registrationsuccessful = "Congratulations! Your account has been created";
 const error401 = "Authorization failed";
-const errorMessage = { error500, emailExist, error401 };
+const errorMessage = { error500, emailExist, error401, emailDontExist };
 
 const succesMessage = {
   updatesuccess,
   registrationsuccessful,
+  emailCheck
 };
 
 const getAllUser = async (req, res) => {
@@ -113,10 +115,10 @@ const findEmail = async (req, res) => {
     const {email} = req.body;
 
     const checkEmail = await userService.findEmail({email});
-    return res.json(checkEmail);
-    // if (checkEmail) return res.status(200).json({message : succesMessage.emailExist1 });   
-    // else 
-    // return res.status(400).json({message : errorMessage.emailExist});
+    // return res.json(checkEmail);
+    if (checkEmail) return res.status(200).json({message : succesMessage.emailCheck});   
+    else 
+    return res.status(400).json({message : errorMessage.emailDontExist});
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message : errorMessage.error500});
