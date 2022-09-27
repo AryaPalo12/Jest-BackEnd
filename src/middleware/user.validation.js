@@ -53,10 +53,17 @@ const updateUserValidation = {
   },
 };
 
+const forgotValidation = {
+  email: {
+    in: ["body"],
+    isEmail: true,
+  }   
+};
 
 module.exports = {
   registrationValidationObject,
   loginValidationObject,
   updateUserValidation,
-  updatePasswordObject
+  updatePasswordObject,
+  forgotValidation
 };

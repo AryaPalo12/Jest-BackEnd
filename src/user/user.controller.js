@@ -108,13 +108,29 @@ const userAddScore = async (req, res) => {
   }
 };
 
+const findEmail = async (req, res) => { 
+  try {
+    const {email} = req.body;
+
+    const checkEmail = await userService.findEmail({email});
+    return res.json(checkEmail);
+    // if (checkEmail) return res.status(200).json({message : succesMessage.emailExist1 });   
+    // else 
+    // return res.status(400).json({message : errorMessage.emailExist});
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message : errorMessage.error500});
+  }
+};
+
 const userController = {
   userAddScore,
   createUser,
   getAllUser,
   editUser,
   getUserById,
-  editPassword
+  editPassword,
+  findEmail
 };
 
 module.exports = userController;
