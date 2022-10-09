@@ -50,7 +50,7 @@ const checkWinner = async ({ roomId }) => {
     const userWinner = await userRepo.getUserById({ userId });
 
     result = userWinner.fullname;
-    let score = userWinner.score + 1;
+    let score = userWinner.score + 2;
     await userRepo.updateScore({ score, userId });
   }
   await gameRepo.updateWinner({ result, roomId });
