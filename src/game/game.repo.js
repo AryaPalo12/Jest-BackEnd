@@ -26,7 +26,7 @@ const gameList = async (pageNumber) => {
     return await Game.findAll({
       order: [
         ["winner", "DESC"],
-        ["id", "ASC"],
+        ["id", "DESC"],
       ],
       offset: (pageNumber - 1) * pageFormula,
       limit: limitValue,
