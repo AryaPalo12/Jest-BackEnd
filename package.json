@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon app.js",
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": "jest --coverage",
+    "pretest": "set NODE_ENV=test&& npx sequelize-cli db:migrate:undo:all & set NODE_ENV=test&& npx sequelize-cli db:migrate"
   },
   "keywords": [],
   "author": "greiq",
@@ -32,6 +34,7 @@
     "validate": "^5.2.0"
   },
   "devDependencies": {
+    "jest": "^29.2.2",
     "sequelize-cli": "^6.4.1"
   }
 }

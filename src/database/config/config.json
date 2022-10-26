@@ -13,6 +13,14 @@
       }
     }
   },
+    "test": {
+    "username": "testing_admin",
+    "password": "testing_admin",
+    "database": "testing",
+    "host": "0.0.0.0",
+    "dialect": "postgres",
+    "port" : "49153"
+  },
   "production": {
     "username": "fjgmwfgkgoldux",
     "password": "76999dc6829bbbfb7e06ae74d90ae03eeee7d211d99fde9b565df114e6a3381b",
