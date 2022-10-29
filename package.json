@@ -7,7 +7,7 @@
     "dev": "nodemon app.js",
     "start": "node app.js",
     "test": "jest --coverage",
-    "pretest": "set NODE_ENV=test&& npx sequelize-cli db:migrate:undo:all & set NODE_ENV=test&& npx sequelize-cli db:migrate"
+    "pretest": "set NODE_ENV=test&& npx sequelize-cli db:migrate:undo:all & set NODE_ENV=test&& npx sequelize-cli db:migrate&& npx sequelize-cli db:seed:all "
   },
   "keywords": [],
   "author": "greiq",
