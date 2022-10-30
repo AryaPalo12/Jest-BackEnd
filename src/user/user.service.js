@@ -16,9 +16,7 @@ const getAllUser = async ({ pageNumber, limitParm }) => {
 
 const createUser = async ({ fullname, email, password }) => {
   const hashPassword = await bcrypt.hash(password, saltRound);
-  console.log(hashPassword);
   const checkEmailUser = await userRepo.checkEmailAllUser(email);
-  console.log(checkEmailUser);
 
   if (!checkEmailUser) {
     const getUserRepo = await userRepo.createUser({
@@ -103,7 +101,6 @@ const findEmail = async ({ email }) => {
 
 const editPassword = async ({ userId, password }) => {
   const hashPassword = await bcrypt.hash(password, saltRound);
-  console.log(hashPassword)
   const changedPassword = await userRepo.editPassword({
     userId,
     hashPassword,
@@ -118,7 +115,7 @@ const getUserById = async ({ userId }) => {
 const userAddScore = async (userId) => {
   const userWinner = await userRepo.getUserById({ userId });
   const score = userWinner.score + 1;
-  await userRepo.updateScore({ score, userId });
+  return await userRepo.updateScore({ score, userId });
 };
 
 const userService = {

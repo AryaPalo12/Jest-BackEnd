@@ -95,7 +95,6 @@ describe("user.repo.js", () => {
     describe('#getUserById', () => {
       it('should get a user by Id', async ()=> {
         const result = await getUserById ({userId: 1});
-        console.log(result);
         expect(result.length).not.toBe(0);
         expect(result).toBeTruthy();
       });
