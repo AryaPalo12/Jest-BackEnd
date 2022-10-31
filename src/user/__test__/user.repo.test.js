@@ -60,7 +60,7 @@ describe("user.repo.js", () => {
     });
     describe('#editUser', ()=> {
       it('should edit an existing user email and fullname', async () =>{
-        const result = await editUser({fullname: 'Amila', email: 'changed@gmail.com', userId: 1});
+        const result = await editUser({fullname: 'Amila', email: 'changed@gmail.com', userId: 3});
         expect(result).toStrictEqual([1]);
       });
       it('should not edit an incomplete parameter', async () => {
@@ -86,7 +86,7 @@ describe("user.repo.js", () => {
 
     describe('#checkSameEmail', () => {
       it('should get at least a user with the same email', async () => {
-        const result = await checkSameEmail({email: 'changed@gmail.com', authUserId: 1});
+        const result = await checkSameEmail({email: 'changed@gmail.com', authUserId: 3});
         expect(result).toBeTruthy();
         expect(result.length).not.toBe(0)
       });

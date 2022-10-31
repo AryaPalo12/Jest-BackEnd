@@ -59,7 +59,8 @@ describe('user.service.js', () => {
     describe('#editUser', () => {
         //given
         const testEditUser = {
-            fullname: faker.name.fullname,
+            fullname: faker.name.fullName(),
+            email: faker.internet.email(),
             userId : 3,
             authUserId : 3
         }
@@ -68,9 +69,9 @@ describe('user.service.js', () => {
             userRepo.checkEmailAllUser = jest.fn(()=> null);
             userRepo.checkSameEmail = jest.fn(()=>null);
             //when
-            const result = await editUser({fullname : testEditUser.fullname, email: testData.email, userId: testEditUser.userId, authUserId: testEditUser.authUserId}); 
-            expect(userRepo.checkEmailAllUser).toBeCalledWith(testData.email);
-            expect(userRepo.checkSameEmail).toBeCalledWith({email: testData.email, authUserId: testEditUser.authUserId});
+            const result = await editUser({fullname : testEditUser.fullname, email: testEditUser.email, userId: testEditUser.userId, authUserId: testEditUser.authUserId}); 
+            expect(userRepo.checkEmailAllUser).toBeCalledWith(testEditUser.email);
+            expect(userRepo.checkSameEmail).toBeCalledWith({email: testEditUser.email, authUserId: testEditUser.authUserId});
             expect(result).toBe("Update successful");
         })
         it('should not edit the user', async () => {

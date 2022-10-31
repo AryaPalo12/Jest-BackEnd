@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">35.13% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>13/37</span>
+                <span class='fraction'>37/37</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/28</span>
+                <span class='fraction'>28/28</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/5</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">35.13% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>13/37</span>
+                <span class='fraction'>37/37</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -159,35 +159,35 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -226,36 +226,36 @@ const updatePlayerChoice = async ({ player, userId, userChoice, roomId }) =&gt; 
   });
 };
 &nbsp;
-const checkWinner = <span class="fstat-no" title="function not covered" >as</span>ync ({ roomId }) =&gt; {
-  let result = <span class="cstat-no" title="statement not covered" >"";</span>
-  const room = <span class="cstat-no" title="statement not covered" >await gameRepo.getRoom({ roomId });</span>
-<span class="cstat-no" title="statement not covered" >  if (room.user1_choice == room.user2_choice) {</span>
-<span class="cstat-no" title="statement not covered" >    result = "DRAW";</span>
+const checkWinner = async ({ roomId }) =&gt; {
+  let result = "";
+  const room = await gameRepo.getRoom({ roomId });
+  if (room.user1_choice == room.user2_choice) {
+    result = "DRAW";
   } else {
-<span class="cstat-no" title="statement not covered" >    if (room.user1_choice == "P" &amp;&amp; room.user2_choice == "R")</span>
-<span class="cstat-no" title="statement not covered" >      result = room.userId1;</span>
-<span class="cstat-no" title="statement not covered" >    if (room.user1_choice == "R" &amp;&amp; room.user2_choice == "S")</span>
-<span class="cstat-no" title="statement not covered" >      result = room.userId1;</span>
-<span class="cstat-no" title="statement not covered" >    if (room.user1_choice == "S" &amp;&amp; room.user2_choice == "P")</span>
-<span class="cstat-no" title="statement not covered" >      result = room.userId1;</span>
-<span class="cstat-no" title="statement not covered" >    if (room.user1_choice == "P" &amp;&amp; room.user2_choice == "S")</span>
-<span class="cstat-no" title="statement not covered" >      result = room.userId2;</span>
-<span class="cstat-no" title="statement not covered" >    if (room.user1_choice == "R" &amp;&amp; room.user2_choice == "P")</span>
-<span class="cstat-no" title="statement not covered" >      result = room.userId2;</span>
-<span class="cstat-no" title="statement not covered" >    if (room.user1_choice == "S" &amp;&amp; room.user2_choice == "R")</span>
-<span class="cstat-no" title="statement not covered" >      result = room.userId2;</span>
+    if (room.user1_choice == "P" &amp;&amp; room.user2_choice == "R")
+      result = room.userId1;
+    if (room.user1_choice == "R" &amp;&amp; room.user2_choice == "S")
+      result = room.userId1;
+    if (room.user1_choice == "S" &amp;&amp; room.user2_choice == "P")
+      result = room.userId1;
+    if (room.user1_choice == "P" &amp;&amp; room.user2_choice == "S")
+      result = room.userId2;
+    if (room.user1_choice == "R" &amp;&amp; room.user2_choice == "P")
+      result = room.userId2;
+    if (room.user1_choice == "S" &amp;&amp; room.user2_choice == "R")
+      result = room.userId2;
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  if (result != "DRAW") {</span>
-    let userId = <span class="cstat-no" title="statement not covered" >parseInt(result);</span>
-    const userWinner = <span class="cstat-no" title="statement not covered" >await userRepo.getUserById({ userId });</span>
+  if (result != "DRAW") {
+    let userId = parseInt(result);
+    const userWinner = await userRepo.getUserById({ userId });
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    result = userWinner.fullname;</span>
-    let score = <span class="cstat-no" title="statement not covered" >userWinner.score + 2;</span>
-<span class="cstat-no" title="statement not covered" >    await userRepo.updateScore({ score, userId });</span>
+    result = userWinner.fullname;
+    let score = userWinner.score + 2;
+    await userRepo.updateScore({ score, userId });
   }
-<span class="cstat-no" title="statement not covered" >  await gameRepo.updateWinner({ result, roomId });</span>
-<span class="cstat-no" title="statement not covered" >  return result;</span>
+  await gameRepo.updateWinner({ result, roomId });
+  return result;
 };
 &nbsp;
 const FunctionGameService = {
@@ -274,7 +274,7 @@ module.exports = FunctionGameService;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-30T10:21:46.414Z
+                at 2022-10-31T10:48:27.459Z
             </div>
         <script src="../prettify.js"></script>
         <script>

@@ -1,4 +1,6 @@
-const { createGame, gameList, getRoom, updatePlayerChoice } = require("../game.service");
+const userRepo = require("../../user/user.repo");
+const functionGameRepo = require("../game.repo");
+const { createGame, gameList, getRoom, updatePlayerChoice, checkWinner } = require("../game.service");
 
 describe("game.repo.js", () => {
 
@@ -47,5 +49,188 @@ describe("game.repo.js", () => {
         }); 
     });
     describe('#checkWinner', () =>{
+        it('should check who the winner of the room is PR', async () => {
+            //given
+            const testGameData = {
+                roomId:1
+            };
+            userRepo.getUserById = jest.fn(()=> {
+                return {
+                    fullname: 'Winner1'
+                };
+            });
+            functionGameRepo.updateWinner = jest.fn(()=>null);
+            functionGameRepo.getRoom = jest.fn(()=> {
+                return {
+                    user1_choice: 'P',
+                    user2_choice: 'R',
+                    userId1 : 4,
+                    userId2 : 3
+                }
+            });
+            userRepo.updateScore = jest.fn(()=>null);
+            //when
+            const result = await checkWinner(testGameData.roomId);
+            //result
+            console.log(result);
+            expect(result).not.toBeNull();
+            expect(result).toBe('Winner1');
+        });
+        it('should check who the winner of the room is PR', async () => {
+            //given
+            const testGameData = {
+                roomId:1
+            };
+            userRepo.getUserById = jest.fn(()=> {
+                return {
+                    fullname: 'Winner1'
+                };
+            });
+            functionGameRepo.updateWinner = jest.fn(()=>null);
+            functionGameRepo.getRoom = jest.fn(()=> {
+                return {
+                    user1_choice: 'R',
+                    user2_choice: 'S',
+                    userId1 : 2,
+                    userId2 : 1
+                }
+            });
+            userRepo.updateScore = jest.fn(()=>null);
+            //when
+            const result = await checkWinner(testGameData.roomId);
+            //result
+            console.log(result);
+            expect(result).not.toBeNull();
+            expect(result).toBe('Winner1');
+        });
+        it('should check who the winner of the room is PR', async () => {
+            //given
+            const testGameData = {
+                roomId:1
+            };
+            userRepo.getUserById = jest.fn(()=> {
+                return {
+                    fullname: 'Winner1'
+                };
+            });
+            functionGameRepo.updateWinner = jest.fn(()=>null);
+            functionGameRepo.getRoom = jest.fn(()=> {
+                return {
+                    user1_choice: 'S',
+                    user2_choice: 'P',
+                    userId1 : 4,
+                    userId2 : 3
+                }
+            });
+            userRepo.updateScore = jest.fn(()=>null);
+            //when
+            const result = await checkWinner(testGameData.roomId);
+            //result
+            console.log(result);
+            expect(result).not.toBeNull();
+            expect(result).toBe('Winner1');
+        });
+        it('should check who the winner of the room is PR', async () => {
+            //given
+            const testGameData = {
+                roomId:1
+            };
+            userRepo.getUserById = jest.fn(()=> {
+                return {
+                    fullname: 'Winner2'
+                };
+            });
+            functionGameRepo.updateWinner = jest.fn(()=>null);
+            functionGameRepo.getRoom = jest.fn(()=> {
+                return {
+                    user1_choice: 'P',
+                    user2_choice: 'S',
+                    userId1 : 3,
+                    userId2 : 4
+                }
+            });
+            userRepo.updateScore = jest.fn(()=>null);
+            //when
+            const result = await checkWinner(testGameData.roomId);
+            //result
+            console.log(result);
+            expect(result).not.toBeNull();
+            expect(result).toBe('Winner2');
+        });
+        it('should check who the winner of the room is PR', async () => {
+            //given
+            const testGameData = {
+                roomId:1
+            };
+            userRepo.getUserById = jest.fn(()=> {
+                return {
+                    fullname: 'Winner2'
+                };
+            });
+            functionGameRepo.updateWinner = jest.fn(()=>null);
+            functionGameRepo.getRoom = jest.fn(()=> {
+                return {
+                    user1_choice: 'R',
+                    user2_choice: 'P',
+                    userId1 : 3,
+                    userId2 : 4
+                }
+            });
+            userRepo.updateScore = jest.fn(()=>null);
+            //when
+            const result = await checkWinner(testGameData.roomId);
+            //result
+            console.log(result);
+            expect(result).not.toBeNull();
+            expect(result).toBe('Winner2');
+        });
+        it('should check who the winner of the room is PR', async () => {
+            //given
+            const testGameData = {
+                roomId:1
+            };
+            userRepo.getUserById = jest.fn(()=> {
+                return {
+                    fullname: 'Winner2'
+                };
+            });
+            functionGameRepo.updateWinner = jest.fn(()=>null);
+            functionGameRepo.getRoom = jest.fn(()=> {
+                return {
+                    user1_choice: 'S',
+                    user2_choice: 'R',
+                    userId1 : 3,
+                    userId2 : 4
+                }
+            });
+            userRepo.updateScore = jest.fn(()=>null);
+            //when
+            const result = await checkWinner(testGameData.roomId);
+            //result
+            console.log(result);
+            expect(result).not.toBeNull();
+            expect(result).toBe('Winner2');
+        });
+        it('should check who the winner of the room is PR', async () => {
+            //given
+            const testGameData = {
+                roomId:1
+            };
+            functionGameRepo.updateWinner = jest.fn(()=>null);
+            functionGameRepo.getRoom = jest.fn(()=> {
+                return {
+                    user1_choice: 'R',
+                    user2_choice: 'R',
+                    userId1 : 4,
+                    userId2 : 3
+                }
+            });
+            //when
+            const result = await checkWinner(testGameData.roomId);
+            //result
+            console.log(result);
+            expect(result).not.toBeNull();
+            expect(result).toBe('DRAW');
+        });
     })
 });
