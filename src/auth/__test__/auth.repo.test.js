@@ -11,6 +11,6 @@ describe("auth.repo.js", () => {
       it('should not return a user with an empty args.', async () => {
         const result = await authUser({email: ''});
         expect(result).toBeFalsy();
-      })
+      });
 });
 });

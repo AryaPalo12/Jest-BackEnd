@@ -22,7 +22,7 @@ const getAllUser = async (req, res) => {
     const dataUser = await userService.getAllUser({ pageNumber, limitParm });
     return res.json(dataUser);
   } catch (error) {
-    return res.json(errorMessage);
+    return res.status(500).json(errorMessage.error500);
   }
 };
 
