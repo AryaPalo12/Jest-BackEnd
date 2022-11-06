@@ -61,6 +61,7 @@ const editUser = async (req, res) => {
         userId,
         authUserId,
       });
+      console.log(getEditUserService);
       return res.status(200).json({ message: getEditUserService });
     } else {
       return res.status(401).json({ message: errorMessage.error401 });
@@ -92,7 +93,7 @@ const getUserById = async (req, res) => {
   try {
     const { userId } = req.params;
     const user = await userService.getUserById({ userId });
-    res.status(200).json(user);
+    return res.status(200).json(user);
   } catch (error) {
     return res.status(500).json({ message: errorMessage.error500 });
   }
@@ -102,9 +103,9 @@ const userAddScore = async (req, res) => {
   try {
     const { userId } = req.params;
     await userService.userAddScore(userId);
-    res.status(200).json({ userId, message: "Score Added Success" });
+    return res.status(200).json({ userId, message: "Score Added Success" });
   } catch (error) {
-    res
+    return res
       .status(500)
       .json({ message: "Something gone wrong when adding the score" });
   }

@@ -19,7 +19,7 @@
     "database": "testing",
     "host": "0.0.0.0",
     "dialect": "postgres",
-    "port" : "49153"
+    "port" : "5432"
   },
   "production": {
     "username": "fjgmwfgkgoldux",

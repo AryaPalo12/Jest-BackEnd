@@ -2,9 +2,10 @@ const { createUser, getAllUser, editUser, findEmail, editPassword, getUserById, 
 const { faker } = require("@faker-js/faker");
 const bcrypt = require("bcrypt");
 const userRepo = require("../user.repo");
-// const nodemailer = require('nodemailer');
+const nodemailer = require('nodemailer');
 
-// jest.mock('nodemailer');
+
+
 
 const testData = {
     fullname : faker.name.fullName(),
@@ -13,7 +14,6 @@ const testData = {
 };
 
 bcrypt.hash = jest.fn(() => "test");
-// nodemailer.createTransport = jest.fn(()=> 'done transport');
 
 describe('user.service.js', () => {
     describe('#getAllUser', () => {
@@ -89,23 +89,38 @@ describe('user.service.js', () => {
             expect(result).toBe('This email is already being used, Please choose another email')
         });
     });
-    // describe('#findEmail', () => {
-    //     it('should get the user email', async () => {
-    //         //given
-    //         userRepo.checkEmailAllUser = jest.fn(()=> {
-    //             return {
-    //                 fullname: 'registered',
-    //                 email: 'fake1@mail.com'
-    //             }
-    //         });
-    //         userRepo.editPassword = jest.fn(() => {
-    //             return 
-    //         } );
-    //         //when
-    //         const result = await findEmail ({email: testData.email});
-    //         expect(result).toBe({});
-    //     });
-    // });
+    describe('#findEmail', () => {
+        userRepo.checkEmailAllUser = jest.fn();
+        const emailTest = {
+            id:2,
+            fullname: 'registered',
+            email: 'fake1@mail.com'
+        };
+        it('should send the user password reset email', async () => {
+            //given
+            jest.mock('nodemailer', () => ({
+                createTransport: jest.fn().mockReturnValue({
+                    sendMail: jest.fn().mockReturnValue((mailoptions, callback) => {})
+                  })
+            }));
+            userRepo.checkEmailAllUser.mockReturnValue(emailTest);
+            userRepo.editPassword = jest.fn(()=>[1]);
+            //when
+            const result = await findEmail ({email: testData.email});
+            //expect
+            expect(userRepo.checkEmailAllUser).toBeCalled();
+            expect(result).toBe(emailTest.email);
+        });
+        it('should not send the user the reset email', async () => {
+            //given
+            userRepo.checkEmailAllUser.mockReturnValue(null);
+            //when
+            const result = await findEmail ({email: testData.email});
+            //expect
+            expect(userRepo.checkEmailAllUser).toBeCalled();
+            expect(result).toBe(null);
+        });
+    });
     describe('#editPassword', () => {
         it('should edit the user by userId and new Password', async () => {
             //given

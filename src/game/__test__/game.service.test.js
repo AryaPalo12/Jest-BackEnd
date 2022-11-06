@@ -72,7 +72,6 @@ describe("game.repo.js", () => {
             //when
             const result = await checkWinner(testGameData.roomId);
             //result
-            console.log(result);
             expect(result).not.toBeNull();
             expect(result).toBe('Winner1');
         });
@@ -99,7 +98,7 @@ describe("game.repo.js", () => {
             //when
             const result = await checkWinner(testGameData.roomId);
             //result
-            console.log(result);
+            expect(userRepo.updateScore).toBeCalled();
             expect(result).not.toBeNull();
             expect(result).toBe('Winner1');
         });
@@ -126,7 +125,7 @@ describe("game.repo.js", () => {
             //when
             const result = await checkWinner(testGameData.roomId);
             //result
-            console.log(result);
+            expect(userRepo.updateScore).toBeCalled();
             expect(result).not.toBeNull();
             expect(result).toBe('Winner1');
         });
@@ -153,8 +152,8 @@ describe("game.repo.js", () => {
             //when
             const result = await checkWinner(testGameData.roomId);
             //result
-            console.log(result);
             expect(result).not.toBeNull();
+            expect(userRepo.updateScore).toBeCalled();
             expect(result).toBe('Winner2');
         });
         it('should check who the winner of the room is PR', async () => {

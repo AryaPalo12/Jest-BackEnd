@@ -85,14 +85,7 @@ const findEmail = async ({ email }) => {
       <h2>Your new password is :  ${password}</h2>`
     };
     
-    transporter.sendMail(mailOptions, function(error, info){
-      if (error) {
-        console.log(error);
-      } else {
-        console.log('Email sent: ' + info.response);
-        info.response;
-      }
-    });
+    transporter.sendMail(mailOptions);
   } else {
     return null;
   }

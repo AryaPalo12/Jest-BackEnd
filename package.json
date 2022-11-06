@@ -1,5 +1,11 @@
 {
   "name": "boilercode",
+  "jest": {
+      "coveragePathIgnorePatterns" : [
+        "<rootDir>/src/database.models/index.js",
+        "<rootDir>/src/middleware/validation.js"
+      ]
+  },
   "version": "1.0.0",
   "description": "KET : CD to this directory",
   "main": "index.js",

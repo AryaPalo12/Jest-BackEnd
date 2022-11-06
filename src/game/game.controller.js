@@ -17,14 +17,13 @@ const createGame = async (req, res) => {
     });
     return res.status(200).json(createGame);
   } catch (error) {
-    return res.send(error);
+    return res.status(500).send(error);
   }
 };
 
 const gameList = async (req, res) => {
   try {
     const {pageNumber} = req.query
-    console.log(pageNumber)
     const gameList = await gameService.gameList(pageNumber);
 
 
@@ -48,7 +47,6 @@ const getRoom = async (req,res) => {
 const updatePlayerChoice = async (req,res) => {
   try {
     const {player, userId, userChoice} = req.body;
-    console.log (player);
     const {roomId} = req.params;
     let result = await gameService.updatePlayerChoice({player, userId, userChoice, roomId});
     if(player == "player1"){

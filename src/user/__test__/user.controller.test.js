@@ -1,10 +1,17 @@
 const { faker } = require("@faker-js/faker");
 const httpMock = require("node-mocks-http");
-const { createUser, getAllUser, editPassword } = require("../user.controller");
+const { createUser, getAllUser, editPassword, editUser, getUserById, userAddScore, findEmail } = require("../user.controller");
 const userService = require("../user.service");
 
-const req = httpMock.createRequest();
-const res = httpMock.createResponse({eventEmitter: require('events').EventEmitter});
+let req;
+let res;
+
+beforeEach(()=> {
+    req = httpMock.createRequest();
+    res = httpMock.createResponse();
+})
+
+
 
 userService.createUser = jest.fn();
 
@@ -43,7 +50,6 @@ describe('user.controller.js', () => {
             userService.createUser.mockRejectedValue(new Error());
             //when
             const result = await createUser(req,res);
-            console.log(result);
             expect(userService.createUser).toBeCalled();
             expect(result._getJSONData()).toStrictEqual({
                 message: "Something went wrong. Please try again later"
@@ -90,7 +96,7 @@ describe('user.controller.js', () => {
             const result = await getAllUser(req,res);
             //expect
             expect(result.statusCode).toBe(500);
-            expect(result._getJSONData().error500).toBe('Something went wrong. Please try again later')
+            expect(result._getJSONData()).toBe('Something went wrong. Please try again later')
         });
     });
     describe('#editPassword', ()=> {
@@ -159,4 +165,171 @@ describe('user.controller.js', () => {
             expect(result.statusCode).toBe(500);
         });
     });
-})
+    describe('#editUser', () => {
+        const testUserId = {
+            fullname: faker.name.fullName(),
+            email: faker.internet.email(),
+            password: faker.internet.password(),
+            userId: 4,
+            id : 4
+        };
+        userService.editUser = jest.fn();
+        it('should successfully edit the user data', async () => {
+            //given
+            req.body = testUserId;
+            req.params = testUserId;
+            req.auth = testUserId;
+            userService.editUser.mockReturnValue('Update successful');
+            //when
+            const result = await editUser(req,res);
+            //expect
+            expect(userService.editUser).toBeCalled()
+            expect(result.statusCode).toBe(200);
+            expect(result._getJSONData()).toEqual({ message: 'Update successful' });
+        });
+        it('should give a 401 Error message if the userId and token Id is different', async () => {
+            //given
+            req.body = testUserId;
+            req.params = testUserId;
+            req.auth = {
+                id : 3,
+                email : 'wrong@gmail.com'
+            };
+            //when
+            const result = await editUser (req,res);
+            //expect
+            expect(result.statusCode).toBe(401);
+            expect(result._getJSONData()).toEqual({
+                message : 'Authorization failed'
+            });
+        });
+        it('should given error code 500', async () => {
+            //given
+            req.body = testUserId;
+            req.params = testUserId;
+            req.auth = testUserId;
+            userService.editUser.mockRejectedValue(new Error());
+            //when
+            const result = await editUser(req,res);
+            //expect
+            expect(userService.editUser).toBeCalled()
+            expect(result.statusCode).toBe(500);
+            expect(result._getJSONData()).toEqual({ message: 'Something went wrong. Please try again later' });
+        });
+    });
+    describe('#getUserById', () => {
+        const testUserId = {
+            id: 2,
+            fullname : faker.name.fullName(),
+            email: faker.internet.email(),
+            userId: 2,
+            score: 0
+        };
+        userService.getUserById = jest.fn();
+        it('should get a specific user by the Id', async () => {
+            //given
+            req.params = testUserId;
+            userService.getUserById.mockReturnValue({
+                id: 2,
+                fullname: testUserId.fullname,
+                email: testUserId.email,
+                score: 0
+            })
+            //when
+            const result = await getUserById (req,res);
+            //expect
+            expect(result.statusCode).toBe(200)
+            expect(result._getJSONData().fullname).toBe(testUserId.fullname);
+            expect(result._getJSONData().email).toBe(testUserId.email);
+        });
+        it('should show an error 500 if the get User by id failed', async () => {
+            //given
+            userService.getUserById.mockRejectedValue(new Error());
+            //when
+            const result = await getUserById(req,res);
+            //expect
+            expect(userService.getUserById).toBeCalled();
+            expect(result.statusCode).toBe(500);
+            expect(result._getJSONData()).toEqual({
+                message: 'Something went wrong. Please try again later'
+            });
+        });
+    });
+    describe('#userAddScore', () => {
+        const testUserId = {
+            userId: 2,
+        };
+        userService.userAddScore = jest.fn();
+        it('should successfully add the user score', async () => {
+            //given
+            req.params = testUserId;
+            userService.userAddScore.mockReturnValue('success');
+            //when
+            const result = await userAddScore(req,res);
+            //expect
+            console.log(result._getJSONData());
+            expect(userService.userAddScore).toBeCalled();
+            expect(result._getJSONData()).toStrictEqual({
+                userId: 2,
+                message: 'Score Added Success'
+            });
+            expect(result.statusCode).toBe(200)
+        });
+        it('should show error 500 when adding score failed or user id does not exist ', async () => {
+            //given
+            req.params = testUserId;
+            userService.userAddScore.mockRejectedValue(new Error());
+            //when
+            const result = await userAddScore(req,res);
+            //expect
+            expect(result.statusCode).toBe(500);
+            expect(result._getJSONData()).toStrictEqual({
+                message: 'Something gone wrong when adding the score'
+            });         
+        });
+    });
+    describe('#findEmail', () => {
+        userService.findEmail = jest.fn();
+        const emailTest = {
+            email: faker.internet.email(),
+        }
+        it('should send a password reset email to the user', async () => {
+            //given
+            req.body = emailTest;
+            userService.findEmail.mockReturnValue(emailTest.email)
+            //when
+            const result = await findEmail(req,res);
+            //expect
+            expect(result.statusCode).toBe(200);
+            expect(userService.findEmail).toBeCalled();
+            expect(result._getJSONData()).toStrictEqual({
+                message: 'Kindly check your email account!, We have sent a new password for you'
+            });
+        });
+        it('should return an error 400 email not found', async () => {
+            //given
+            req.body = emailTest;
+            userService.findEmail.mockReturnValue(null)
+            //when
+            const result = await findEmail(req,res);
+            //expect
+            expect(result.statusCode).toBe(400);
+            expect(userService.findEmail).toBeCalled();
+            expect(result._getJSONData()).toStrictEqual({
+                message: 'We do not find your email. Please, input correctly!'
+            });
+        });
+        it('should return Error 500 something goes wrong while resetting password', async () => {
+            //given
+            userService.findEmail.mockRejectedValue(new Error());
+            //when
+            const result = await findEmail(req,res);
+            //expect
+            expect(result.statusCode).toBe(500);
+            expect(userService.findEmail).toBeCalled();
+            expect(result._getJSONData()).toStrictEqual({
+                message: 'Something went wrong. Please try again later'
+            });
+        });
+    });
+});
